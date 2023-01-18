@@ -24,7 +24,7 @@ const message = [
 
 let mass_id = 0;
 let length_mass = 0;
-let lengt_num_mas = 0;
+let length_num_mas = 0;
 let text = "";
 let process = true;
 const set = setTimeout(() => {
@@ -38,14 +38,14 @@ const set = setTimeout(() => {
 
   const mas_inf = setInterval(function () {
     if (process == true) {
-      if (lengt_num_mas != message.length) {
-        text += message[lengt_num_mas].m[length_mass];
+      if (length_num_mas != message.length) {
+        text += message[length_num_mas].m[length_mass];
         length_mass++;
         scrollDown();
-        $("#mass" + lengt_num_mas + "").html(text);
+        $("#mass" + length_num_mas + "").html(text);
         if (
-          lengt_num_mas === 3 &&
-          length_mass === message[lengt_num_mas].m.length - 1
+          length_num_mas === 3 &&
+          length_mass === message[length_num_mas].m.length - 1
         ) {
           appGender();
           process = false;
@@ -53,64 +53,57 @@ const set = setTimeout(() => {
           scrollDown();
         }
         if (
-          lengt_num_mas === 4 &&
-          length_mass === message[lengt_num_mas].m.length - 1
+          length_num_mas === 4 &&
+          length_mass === message[length_num_mas].m.length - 1
         ) {
           appAge();
           process = false;
-          // genderNext();
           scrollDown();
         }
         if (
-          lengt_num_mas === 5 &&
-          length_mass === message[lengt_num_mas].m.length - 1
+          length_num_mas === 5 &&
+          length_mass === message[length_num_mas].m.length - 1
         ) {
           process = false;
           yesOrNo();
           scrollDown();
         }
         if (
-          lengt_num_mas === 6 &&
-          length_mass === message[lengt_num_mas].m.length - 1
+          length_num_mas === 6 &&
+          length_mass === message[length_num_mas].m.length - 1
         ) {
           process = false;
           photoFoot();
-          // yesOrNo();
-
-          setTimeout(() => {
-            addArray();
-            process = true;
-          }, 8);
           setTimeout(() => {
             let sc_top = $("#foot1");
             $("#page_chat").animate(
               {
                 scrollTop: sc_top[0].offsetTop,
               },
-              5
+              500
             );
             scrollDown();
-          }, 0);
+          }, 1000);
         }
 
-        if (length_mass == message[lengt_num_mas].m.length) {
+        if (length_mass == message[length_num_mas].m.length) {
           scrollDown();
-          lengt_num_mas++;
+          length_num_mas++;
           mass_id++;
           length_mass = 0;
           text = "";
           app();
-          let proc_scroling = lengt_num_mas - 1;
-          let nev_div = $("#mass" + proc_scroling + "")[0].offsetParent
+          let proc_scrolling = length_num_mas - 1;
+          let nev_div = $("#mass" + proc_scrolling + "")[0].offsetParent
             .offsetTop;
-          scriplongBody(nev_div);
+          scriptLongBody(nev_div);
         }
       } if (
-        lengt_num_mas === 21
+        length_num_mas === 21
       ) {
         scrollDown();
         clearInterval(mas_inf);
-        $('#mass' + lengt_num_mas + '').parent().parent().css('display', 'none');
+        $('#mass' + length_num_mas + '').parent().parent().css('display', 'none');
         $('.iframe-form').css('display', 'block');
         scrollDown();
         clearInterval(set);
@@ -119,8 +112,8 @@ const set = setTimeout(() => {
         showComment();
       }
     }
-  }, 0);
-}, 0);
+  }, 1);
+}, 1000);
 
 function app() {
   const body_mas =
@@ -132,10 +125,10 @@ function app() {
 }
 
 
-function myMassange(userGend) {
+function myMassange(userData) {
   let mass =
     '<div class="chat-content-item user "><div class="chat-content-desc"><div class="chat-content-desc-item user"><p class="user__data">' +
-    userGend +
+    userData +
     "</p></div></div></div>";
   $(".chat-content-list").append(mass);
   scrollDown();
@@ -157,7 +150,7 @@ function genderNext() {
 
     setTimeout(() => {
       process = true;
-    }, 5);
+    }, 500);
     scrollDown();
   });
   $(".chooseGenderW").click(() => {
@@ -167,7 +160,7 @@ function genderNext() {
 
     setTimeout(() => {
       process = true;
-    }, 5);
+    }, 500);
     scrollDown();
   });
 }
@@ -191,14 +184,14 @@ function appAge() {
       process = true;
       clearInterval(data);
     }
-  }, 5);
+  }, 500);
 }
 
 
 function yesOrNo() {
   scrollDown();
   $(".chat-content-list").append(
-    '<div class="chat-content-buttons-gender"><div class="chat-content-buttons-gender-block"><button class="chooseGenderM" id="yes">ДА</button></div><div class="chat-content-buttons-gender-block"><button class="chooseGenderW" id="no">Нет</button></div></div>'
+    '<div class="chat-content-buttons-gender"><div class="chat-content-buttons-gender-block"><button class="chooseGenderM" id="yes">ДА</button></div><div class="chat-content-buttons-gender-block"><button class="chooseGenderW" id="no">НЕТ</button></div></div>'
   );
   $("#yes").click(() => {
     $(".chat-content-buttons-gender").css("display", "none");
@@ -219,10 +212,10 @@ function photoFoot() {
   $(".chat-content-list").append(
     '<div class="chat-content-desc-item manager"><img class="symptomsImg" style="max-width: 625px;" src="images/symptomsFull.png" id="foot1"><img class="symptoms-mobile" src="images/symptoms.png"></div>'
   );
-  // setTimeout(() => {
-  //   addArray();
-  //   process = true;
-  // }, 8);
+  setTimeout(() => {
+    addArray();
+    process = true;
+  }, 8500);
 }
 
 
@@ -290,7 +283,7 @@ function addArray() {
 
 let top_scroling = 0;
 
-function scriplongBody(x) {
+function scriptLongBody(x) {
   let ekac_x = x + 70;
   top_scroling += ekac_x;
   let set = setTimeout(() => {
@@ -298,9 +291,9 @@ function scriplongBody(x) {
       {
         scrollTop: top_scroling,
       },
-      1
+      1000
     );
-  }, 3);
+  }, 300);
 }
 
 function showForm() {
